@@ -139,6 +139,7 @@ import seaborn as sns
 data = {'Дата': ['2023-01-01', '2023-02-01', '2023-03-01'],
         'USD': [75, 76, 74],
         'EUR': [85, 84, 83]}
+df = pd.DataFrame(data)
 
 df = pd.melt(df, id_vars=['Дата'], value_vars=['USD', 'EUR'], var_name='Валюта', value_name='Курс')
 sns.lineplot(data=df, x='Дата', y='Курс', hue='Валюта')
@@ -157,6 +158,7 @@ import plotly.express as px
 data = {'Дата': ['2023-01-01', '2023-02-01', '2023-03-01'],
         'USD': [75, 76, 74],
         'EUR': [85, 84, 83]}
+df = pd.DataFrame(data)
 
 df = pd.melt(df, id_vars=['Дата'], value_vars=['USD', 'EUR'], var_name='Валюта', value_name='Курс')
 fig = px.line(df, x='Дата', y='Курс', color='Валюта', title='Курс рубля по отношению к валютам')
