@@ -69,7 +69,7 @@ plt.show()
 
 
 ```
-
+![Matplotlib Example](https://github.com/PetrSabalov/DiplomWork2024/blob/main/Matplotlib_1.png)
 ### Пример 1: Seaborn
 
 ```python
@@ -86,7 +86,7 @@ plt.show()
 
 ```
 
-![Seaborn Example](https://github.com/3graste/Library-Comparison/blob/main/images/Seaborn.png)
+![Seaborn Example](https://github.com/PetrSabalov/DiplomWork2024/blob/main/Seaborn_1.png)
 
 ### Пример 1: Plotly
 ```python
@@ -103,7 +103,7 @@ fig = px.histogram(df, x='Values', nbins=5)
 fig.show()
 ```
 
-![Plotly Example](https://github.com/3graste/Library-Comparison/blob/main/images/Plotly.png)
+![Plotly Example](![Seaborn Example](https://github.com/PetrSabalov/DiplomWork2024/blob/main/Plotly_1.png))
 
 ## Рекомендации по выбору библиотеки
 
