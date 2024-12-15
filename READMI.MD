@@ -79,8 +79,6 @@ plt.show()
 
 ```
 
-![Matplotlib Example](https://github.com/3graste/Library-Comparison/blob/main/images/Matplotlib.png)
-
 ### Пример 2: Seaborn
 
 ```python
