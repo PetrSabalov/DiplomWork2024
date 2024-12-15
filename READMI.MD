@@ -103,7 +103,68 @@ fig = px.histogram(df, x='Values', nbins=5)
 fig.show()
 ```
 
-![Plotly Example](![Seaborn Example](https://github.com/PetrSabalov/DiplomWork2024/blob/main/Plotly_1.png))
+![Plotly Example]((https://github.com/PetrSabalov/DiplomWork2024/blob/main/Plotly1.png)
+
+### Пример 2: Matplotlib
+
+```python
+import matplotlib.pyplot as plt
+import pandas as pd
+
+# Пример данных
+data = {'Дата': ['2023-01-01', '2023-02-01', '2023-03-01'],
+        'USD': [75, 76, 74],
+        'EUR': [85, 84, 83]}
+df = pd.DataFrame(data)
+
+plt.plot(df['Дата'], df['USD'], label='USD/RUB')
+plt.plot(df['Дата'], df['EUR'], label='EUR/RUB')
+plt.title('Курс рубля по отношению к валютам')
+plt.xlabel('Дата')
+plt.ylabel('Курс')
+plt.xticks(rotation=45)
+plt.legend()
+plt.tight_layout()
+plt.show()
+
+
+```
+![Matplotlib Example](https://github.com/PetrSabalov/DiplomWork2024/blob/main/Matplotlib_2.png)
+
+### Пример 2: Seaborn
+
+```python
+import seaborn as sns
+
+data = {'Дата': ['2023-01-01', '2023-02-01', '2023-03-01'],
+        'USD': [75, 76, 74],
+        'EUR': [85, 84, 83]}
+
+df = pd.melt(df, id_vars=['Дата'], value_vars=['USD', 'EUR'], var_name='Валюта', value_name='Курс')
+sns.lineplot(data=df, x='Дата', y='Курс', hue='Валюта')
+plt.title('Курс рубля по отношению к валютам')
+plt.xticks(rotation=45)
+plt.show()
+
+```
+
+![Seaborn Example](https://github.com/PetrSabalov/DiplomWork2024/blob/main/Seaborn_2.png)
+
+### Пример 2: Plotly
+```python
+import plotly.express as px
+
+data = {'Дата': ['2023-01-01', '2023-02-01', '2023-03-01'],
+        'USD': [75, 76, 74],
+        'EUR': [85, 84, 83]}
+
+df = pd.melt(df, id_vars=['Дата'], value_vars=['USD', 'EUR'], var_name='Валюта', value_name='Курс')
+fig = px.line(df, x='Дата', y='Курс', color='Валюта', title='Курс рубля по отношению к валютам')
+fig.show()
+
+```
+
+![Plotly Example]((https://github.com/PetrSabalov/DiplomWork2024/blob/main/Plotly2.png)
 
 ## Рекомендации по выбору библиотеки
 
