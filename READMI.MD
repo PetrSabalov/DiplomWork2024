@@ -168,6 +168,59 @@ fig.show()
 
 ![Plotly Example]((https://github.com/PetrSabalov/DiplomWork2024/blob/main/Plotly2.png)
 
+### Пример 3: Matplotlib
+
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 10, 100)
+y = np.cos(x)
+
+plt.plot(x, y, label='Косинус')
+plt.title('График функции Косинус')
+plt.xlabel('x')
+plt.ylabel('cos(x)')
+plt.legend()
+plt.grid(True)
+plt.show()
+```
+![Matplotlib Example](https://github.com/PetrSabalov/DiplomWork2024/blob/main/Matplotlib_3.png)
+
+### Пример 3: Seaborn
+```python
+import seaborn as sns
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+
+data = pd.DataFrame(np.random.rand(5, 5), columns=list('ABCDE'))
+
+
+correlation_matrix = data.corr()
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm')
+plt.title('Корреляционная матрица')
+plt.show()
+```
+![Seaborn Example](https://github.com/PetrSabalov/DiplomWork2024/blob/main/Seaborn_3.png)
+
+### Пример 2: Plotly
+```python
+import plotly.express as px
+import pandas as pd
+
+data = pd.DataFrame({
+    'x': [1, 2, 3, 4, 5],
+    'y': [4, 5, 6, 8, 10],
+    'категория': ['A', 'B', 'A', 'B', 'A']
+})
+
+fig = px.scatter(data, x='x', y='y', color='категория', title='Интерактивный график рассеяния')
+fig.show()
+```
+![Plotly Example]((https://github.com/PetrSabalov/DiplomWork2024/blob/main/Plotly3.png)
+
 ## Рекомендации по выбору библиотеки
 
 - **Matplotlib:** Для высококачественных статических графиков и сложных визуализаций.
