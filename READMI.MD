@@ -134,17 +134,24 @@ plt.show()
 ### Пример 2: Seaborn
 
 ```python
+import matplotlib.pyplot as plt
 import seaborn as sns
 
-data = {'Дата': ['2023-01-01', '2023-02-01', '2023-03-01'],
-        'USD': [75, 76, 74],
-        'EUR': [85, 84, 83]}
-df = pd.DataFrame(data)
+# Пример данных о покупательской активности
+categories = ['Игрушки', 'Одежда', 'Книги', 'Электроника', 'Парфюмерия']
+actividad = [30, 25, 20, 15, 10]  # Проценты покупок в каждой категории
 
-df = pd.melt(df, id_vars=['Дата'], value_vars=['USD', 'EUR'], var_name='Валюта', value_name='Курс')
-sns.lineplot(data=df, x='Дата', y='Курс', hue='Валюта')
-plt.title('Курс рубля по отношению к валютам')
-plt.xticks(rotation=45)
+
+colors = sns.color_palette('pastel')[0:5]
+
+
+plt.figure(figsize=(8, 6))
+plt.pie(actividad, labels=categories, autopct='%1.1f%%', startangle=140, colors=colors)
+
+
+plt.title('Покупательская активность в новогодние праздники')
+plt.axis('equal')  # Для отображения круга
+
 plt.show()
 
 ```
@@ -152,17 +159,50 @@ plt.show()
 ![Seaborn Example](https://github.com/PetrSabalov/DiplomWork2024/blob/main/Seaborn_2.png)
 
 ### Пример 2: Plotly
+
 ```python
-import plotly.express as px
+import plotly.graph_objects as go
+import numpy as np
 
-data = {'Дата': ['2023-01-01', '2023-02-01', '2023-03-01'],
-        'USD': [75, 76, 74],
-        'EUR': [85, 84, 83]}
-df = pd.DataFrame(data)
+categories = ['Подарки', 'Еда и напитки', 'Развлечения']
+months = ['Декабрь', 'Январь']
 
-df = pd.melt(df, id_vars=['Дата'], value_vars=['USD', 'EUR'], var_name='Валюта', value_name='Курс')
-fig = px.line(df, x='Дата', y='Курс', color='Валюта', title='Курс рубля по отношению к валютам')
+expenses = {
+    'Подарки': [40, 30],
+    'Еда и напитки': [20, 15],
+    'Развлечения': [10, 5]
+}
+
+x = np.arange(len(months))
+y1 = np.array(expenses['Подарки'])
+y2 = np.array(expenses['Еда и напитки'])
+y3 = np.array(expenses['Развлечения'])
+
+
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(x=x, y=y1, mode='lines+markers', name='Подарки'))
+fig.add_trace(go.Scatter(x=x, y=y2, mode='lines+markers', name='Еда и напитки'))
+fig.add_trace(go.Scatter(x=x, y=y3, mode='lines+markers', name='Развлечения'))
+
+fig.add_trace(go.Scatter(
+    x=np.concatenate([x, x[::-1]]),  # Дублируем ось x
+    y=np.concatenate([y1, y2[::-1]]),  # Объединяем y1 и y2 в обратном порядке
+    fill='toself',  # Заполнение области
+    fillcolor='rgba(0, 100, 80, 0.2)',  # Цвет заливки
+    line=dict(color='rgba(255, 255, 255, 0)'),  # Прозрачная линия
+    name='Подарки и Еда и напитки'
+))
+
+fig.update_layout(
+    title='Покупательная активность в новогодние праздники',
+    xaxis=dict(tickvals=x, ticktext=months),
+    yaxis_title='Расходы (млн $)',
+    legend=dict(x=0, y=1)
+)
+
 fig.show()
+
 
 ```
 
@@ -174,16 +214,46 @@ fig.show()
 import matplotlib.pyplot as plt
 import numpy as np
 
-x = np.linspace(0, 10, 100)
-y = np.cos(x)
+# Пример данных
+years = np.array([2020, 2021, 2022, 2023])
+children = np.array([1, 2, 3, 4, 5])
+стоимость_подарков = np.array([50, 100, 150, 200, 250])  # Примерные стоимости
 
-plt.plot(x, y, label='Косинус')
-plt.title('График функции Косинус')
-plt.xlabel('x')
-plt.ylabel('cos(x)')
-plt.legend()
-plt.grid(True)
+# Генерация случайных данных для цен в разные годы
+prices = np.random.randint(50, 300, size=(len(years), len(children)))
+
+# Создание фигуры и подграфиков
+fig, ax1 = plt.subplots()
+
+# Построение линейного графика
+for i in range(len(years)):
+    ax1.plot(children, prices[i], marker='o', label=f'Год {years[i]}')
+
+# Настройка первого графика
+ax1.set_title('Формирование новогодних цен')
+ax1.set_xlabel('Количество детей')
+ax1.set_ylabel('Стоимость подарков (руб.)')
+ax1.grid()
+ax1.legend(loc='upper left')
+
+# Создание второго осевого объекта для столбчатого графика
+ax2 = ax1.twinx()
+bar_width = 0.15  # Ширина столбцов
+x = np.arange(len(children))
+
+# Построение столбчатого графика для 2023 года
+ax2.bar(x + bar_width, prices[-1], width=bar_width, color='orange', alpha=0.5, label='Цены 2023')
+
+# Настройка второго графика
+ax2.set_ylabel('Столбцы: Цены 2023 (руб.)')
+ax2.set_xticks(x + bar_width / 2)
+ax2.set_xticklabels(children)
+
+
+ax2.legend(loc='upper right')
+
 plt.show()
+
 ```
 ![Matplotlib Example](https://github.com/PetrSabalov/DiplomWork2024/blob/main/Matplotlib_3.png)
 
@@ -205,19 +275,54 @@ plt.show()
 ```
 ![Seaborn Example](https://github.com/PetrSabalov/DiplomWork2024/blob/main/Seaborn_3.png)
 
-### Пример 2: Plotly
+### Пример 3: Plotly
 ```python
-import plotly.express as px
-import pandas as pd
+import plotly.graph_objects as go
 
-data = pd.DataFrame({
-    'x': [1, 2, 3, 4, 5],
-    'y': [4, 5, 6, 8, 10],
-    'категория': ['A', 'B', 'A', 'B', 'A']
-})
+labels = ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
+category1 = [10, 15, 20, 25, 30, 35, 30, 20, 15, 10, 5, 5]
+category2 = [5, 10, 15, 20, 25, 30, 25, 15, 10, 5, 5, 10]
+category3 = [2, 5, 8, 12, 15, 20, 15, 10, 5, 3, 2, 2]
 
-fig = px.scatter(data, x='x', y='y', color='категория', title='Интерактивный график рассеяния')
+# Создание стековой диаграммы
+fig = go.Figure()
+
+fig.add_trace(go.Scatter(
+    x=labels,
+    y=category1,
+    mode='lines+markers',
+    fill='tozeroy',
+    name='Категория 1',
+    stackgroup='one'
+))
+
+fig.add_trace(go.Scatter(
+    x=labels,
+    y=category2,
+    mode='lines+markers',
+    fill='tonexty',
+    name='Категория 2',
+    stackgroup='one'
+))
+
+fig.add_trace(go.Scatter(
+    x=labels,
+    y=category3,
+    mode='lines+markers',
+    fill='tonexty',
+    name='Категория 3',
+    stackgroup='one'
+))
+
+fig.update_layout(
+    title='Стековая диаграмма покупательной активности',
+    xaxis_title='Месяцы',
+    yaxis_title='Расходы',
+    legend=dict(x=0, y=1)
+)
+
 fig.show()
+
 ```
 ![Plotly Example]((https://github.com/PetrSabalov/DiplomWork2024/blob/main/Plotly3.png)
 
