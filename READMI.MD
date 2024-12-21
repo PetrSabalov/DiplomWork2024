@@ -111,7 +111,6 @@ fig.show()
 import matplotlib.pyplot as plt
 import pandas as pd
 
-# Пример данных
 data = {'Дата': ['2023-01-01', '2023-02-01', '2023-03-01'],
         'USD': [75, 76, 74],
         'EUR': [85, 84, 83]}
@@ -137,17 +136,13 @@ plt.show()
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Пример данных о покупательской активности
 categories = ['Игрушки', 'Одежда', 'Книги', 'Электроника', 'Парфюмерия']
 actividad = [30, 25, 20, 15, 10]  # Проценты покупок в каждой категории
 
-
 colors = sns.color_palette('pastel')[0:5]
-
 
 plt.figure(figsize=(8, 6))
 plt.pie(actividad, labels=categories, autopct='%1.1f%%', startangle=140, colors=colors)
-
 
 plt.title('Покупательская активность в новогодние праздники')
 plt.axis('equal')  # Для отображения круга
@@ -186,11 +181,11 @@ fig.add_trace(go.Scatter(x=x, y=y2, mode='lines+markers', name='Еда и нап
 fig.add_trace(go.Scatter(x=x, y=y3, mode='lines+markers', name='Развлечения'))
 
 fig.add_trace(go.Scatter(
-    x=np.concatenate([x, x[::-1]]),  # Дублируем ось x
-    y=np.concatenate([y1, y2[::-1]]),  # Объединяем y1 и y2 в обратном порядке
-    fill='toself',  # Заполнение области
-    fillcolor='rgba(0, 100, 80, 0.2)',  # Цвет заливки
-    line=dict(color='rgba(255, 255, 255, 0)'),  # Прозрачная линия
+    x=np.concatenate([x, x[::-1]]),  
+    y=np.concatenate([y1, y2[::-1]]),  
+    fill='toself',  
+    fillcolor='rgba(0, 100, 80, 0.2)',  
+    line=dict(color='rgba(255, 255, 255, 0)'),  
     name='Подарки и Еда и напитки'
 ))
 
@@ -214,37 +209,31 @@ fig.show()
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Пример данных
 years = np.array([2020, 2021, 2022, 2023])
 children = np.array([1, 2, 3, 4, 5])
 стоимость_подарков = np.array([50, 100, 150, 200, 250])  # Примерные стоимости
 
-# Генерация случайных данных для цен в разные годы
 prices = np.random.randint(50, 300, size=(len(years), len(children)))
 
-# Создание фигуры и подграфиков
 fig, ax1 = plt.subplots()
 
-# Построение линейного графика
 for i in range(len(years)):
     ax1.plot(children, prices[i], marker='o', label=f'Год {years[i]}')
 
-# Настройка первого графика
 ax1.set_title('Формирование новогодних цен')
 ax1.set_xlabel('Количество детей')
 ax1.set_ylabel('Стоимость подарков (руб.)')
 ax1.grid()
 ax1.legend(loc='upper left')
 
-# Создание второго осевого объекта для столбчатого графика
+
 ax2 = ax1.twinx()
 bar_width = 0.15  # Ширина столбцов
 x = np.arange(len(children))
 
-# Построение столбчатого графика для 2023 года
 ax2.bar(x + bar_width, prices[-1], width=bar_width, color='orange', alpha=0.5, label='Цены 2023')
 
-# Настройка второго графика
+
 ax2.set_ylabel('Столбцы: Цены 2023 (руб.)')
 ax2.set_xticks(x + bar_width / 2)
 ax2.set_xticklabels(children)
